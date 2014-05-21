@@ -1,0 +1,22 @@
+#!/bin/bash
+# Inspired by http://lars.st0ne.at/blog/switch%20between%20windows%20within%20the%20same%20application
+
+# get id of the focused window
+ACTIVE_WIN=$(xprop -root | grep '^_NET_ACTIVE_W' | awk -F'# 0x' '{print $2}')
+
+# get window manager class of current window
+WIN_CLASS=$(wmctrl -x -l | grep $ACTIVE_WIN | awk 'BEGIN{FS="[ .]"}{print $5}')
+
+# get list of all windows matching with the class above
+WIN_LIST=$(wmctrl -x -l | awk '$3 ~ "'$WIN_CLASS'" { print $1 }')
+
+# get next window to focus on
+SWITCH_TO=$(echo $WIN_LIST | sed "s/.*$ACTIVE_WIN//")
+
+# if the current window is the last in the list ... take the first one
+if [ "$SWITCH_TO" == '' ]; then
+   SWITCH_TO=$(echo $WIN_LIST | awk '{print $1}')
+fi
+
+# Switch to window
+wmctrl -i -a $SWITCH_TO

@@ -5,3 +5,15 @@ FDM's openbox config
 # GIT Repository: http://github.com/FlorentDotMe/
 ------------------------
 Info: openbox configuration
+
+Requirements:
+- openbox (>= 3.5.2)
+- obmenu (>= 1.0)
+- obconf (>= 2.0.4)
+- tint2 (>= 0.11)
+- nitrogen (>= 1.5.2)
+- volti (>= 0.2.3)
+- pcmanfm (>= 1.2.0)
+- shutter (>= 0.90)
+- terminator (>= 0.97)
+- wmctrl (>= 1.07)
